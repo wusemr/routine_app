@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:routine_app/pages/editRoutinePage.dart';
 import '../models/routine.dart';
 
 class RoutineListPage extends StatefulWidget {
@@ -19,7 +20,18 @@ class RoutineListPage extends StatefulWidget {
 
 class _RoutineListPageState extends State<RoutineListPage> {
   void _editRoutine(Routine routine) {
-    widget.onEdit(routine);
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => EditRoutinePage(
+          routine: routine,
+          onSave: (updatedRoutine) {
+            widget.onEdit(updatedRoutine);
+            setState(() {});
+          }
+        )
+      )
+    );
   }
 
   void _deleteRoutine(String id) {
